@@ -47,6 +47,7 @@ def register_user(barcode: int, first_name: str, last_name: str, password: str) 
     # It means that user is found
     # In that case, we can't register a new user
     if response['status'] == 'ok':
+        flash('User with this barcode already registered')
         return False
 
     # During sending request to an API some error raised
