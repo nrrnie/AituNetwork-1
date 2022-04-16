@@ -7,7 +7,7 @@ from utils import api
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
-        return render_template('register.html')
+        return render_template('index.html')
 
     # All fields expected as filled
     barcode = int(request.form.get('barcode'))
@@ -22,7 +22,7 @@ def register():
         if result:
             return 'main page'
 
-    return render_template('register.html', barcode=int(barcode), first_name=first_name,
+    return render_template('index.html', barcode=int(barcode), first_name=first_name,
                            last_name=last_name, password=password, password_confirm=password_confirm)
 
 
