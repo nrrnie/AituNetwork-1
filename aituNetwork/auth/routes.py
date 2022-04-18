@@ -29,6 +29,23 @@ def sign_up():
 def sign_in():
     if request.method == 'GET':
         return render_template('sign_in.html')
+        
+@auth.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        barcode = int(request.form.get('barcode'))
+        password = request.form.get('password')
+        
+        if None in [barcode, password]:
+            flash('Not all data was given')
+        
+        response = api.login(barcode=barcode, password=password)
+        print(response)
+        
+        if response['status'] == 'error':
+            flash(response['error'])
+        else:
+            return 'main page' # placeholder
 
 
 def check_passwords(password: str, password_confirm: str) -> bool:

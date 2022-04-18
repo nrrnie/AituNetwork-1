@@ -16,7 +16,13 @@ class API:
         link = self.host + '/users/user_by_barcode/%d' % barcode
         response = API.safe_request(link)
         return response if response['status'] == 'error' else response['response']
-
+        
+    def login(self, barcode: int, password: str) -> dict:
+        link = self.host + '/auth/login'
+        data = dict(barcode=barcode, password=password)
+        response = API.safe_request(link)
+        return response if response['status'] == 'error else response['response']
+        
     def add_user(self, barcode: int, first_name: str, last_name: str, password: str):
         link = self.host + '/auth/add/user'
         data = dict(barcode=barcode, first_name=first_name, last_name=last_name, password=password)
