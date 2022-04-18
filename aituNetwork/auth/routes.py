@@ -4,10 +4,10 @@ from aituNetwork.auth import auth
 from utils import api
 
 
-@auth.route('/register', methods=['GET', 'POST'])
-def register():
+@auth.route('/sign_up', methods=['GET', 'POST'])
+def sign_up():
     if request.method == 'GET':
-        return render_template('index.html')
+        return render_template('sign_up.html')
 
     # All fields expected as filled
     barcode = int(request.form.get('barcode'))
@@ -18,12 +18,17 @@ def register():
 
     if check_passwords(password, password_confirm):
         result = register_user(barcode, first_name, last_name, password)
-        print(result)
         if result:
             return 'main page'
 
-    return render_template('index.html', barcode=int(barcode), first_name=first_name,
+    return render_template('sign_up.html', barcode=int(barcode), first_name=first_name,
                            last_name=last_name, password=password, password_confirm=password_confirm)
+
+
+@auth.route('/sign_in', methods=['GET', 'POST'])
+def sign_in():
+    if request.method == 'GET':
+        return render_template('sign_in.html')
 
 
 def check_passwords(password: str, password_confirm: str) -> bool:
