@@ -30,7 +30,7 @@ def sign_in():
     if request.method == 'GET':
         return render_template('sign_in.html')
         
-@auth.route('/login', methods=['GET', 'POST'])
+@auth.route('/login', methods=['POST'])
 def login():
     if request.method == 'POST':
         barcode = int(request.form.get('barcode'))
